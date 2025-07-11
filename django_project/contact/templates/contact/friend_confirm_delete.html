@@ -1,0 +1,14 @@
+<html>
+    <head>
+        <title>Add friend</title>
+    </head>
+    <body>
+        <h1>Are you sure you want to delete"{{friend.name}}"?</h1>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Yes, Delete</button>
+        </form>
+        <a href="{% url 'home' %}">Cancel</a>
+    </body>
+</html>

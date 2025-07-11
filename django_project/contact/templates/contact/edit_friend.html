@@ -1,0 +1,13 @@
+<html>
+    <head>
+        <title>Edit friend</title>
+    </head>
+    <body>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Update</button>
+        </form>
+        <a href="{% url 'home' %}">Back</a>
+    </body>
+</html>

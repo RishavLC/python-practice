@@ -1,0 +1,39 @@
+{%load static %}
+<html lang="en">
+<head>
+    <title>Home</title>
+    <style>
+        body{
+            text-align: center;
+        }
+        table{
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1> Lists of Contacts</h1>
+    <hr>
+    <a href="{% url 'add_friend'%}">Add Friend</a>
+    <a href="{% url 'logout'%}">Logout</a>
+    <hr>
+    <table border="1">
+        <tr>
+            <th>Name</th>
+            <th>Address </th>
+            <th>Phone_no</th>
+            <th>Action</th>
+        </tr>
+    {%for contact in contacts%}
+    <tr>
+        <td>{{contact.name}}</td>
+        <td>{{contact.address}}</td>
+        <td>{{contact.phone_no}}</td>
+        <td><a href="{% url 'edit_friend' contact.id %}">Edit</a>|
+            <a href="{% url 'friend_delete' contact.id %}">Delete</td>
+    </tr>
+    {% comment %} {{contact.name}}-{{contact.address}}-{{contact.phone_no}} {% endcomment %}
+    {% endfor %}
+</table>
+</body>
+</html>
