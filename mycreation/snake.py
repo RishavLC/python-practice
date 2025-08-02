@@ -5,117 +5,119 @@ import random
 # Initialize pygame
 pygame.init()
 
-# Screen size
-width = 600
-height = 400
+# Screen dimensions (classic phone style)
+width, height = 400, 400
+screen = pygame.display.set_mode((width, height))
+pygame.display.set_caption("📟 Classic Snake (Nokia Style)")
 
 # Colors
-white = (255, 255, 255)
 black = (0, 0, 0)
-red = (213, 50, 80)
 green = (0, 255, 0)
-blue = (50, 153, 213)
+white = (255, 255, 255)
+dark_green = (0, 100, 0)
 
-# Create display
-screen = pygame.display.set_mode((width, height))
-pygame.display.set_caption("🐍 Snake Game")
-
+# Grid settings
+cell_size = 10
 clock = pygame.time.Clock()
-snake_block = 10
-snake_speed = 15
+snake_speed = 10
 
-# Fonts
-font_style = pygame.font.SysFont("comicsansms", 25)
-score_font = pygame.font.SysFont("comicsansms", 20)
+# Fonts (pixel-style)
+font = pygame.font.SysFont('Courier', 20, bold=True)
 
-def score_display(score):
-    value = score_font.render("Score: " + str(score), True, black)
-    screen.blit(value, [0, 0])
+def draw_border():
+    pygame.draw.rect(screen, dark_green, [0, 0, width, height], 10)
 
-def draw_snake(snake_block, snake_list):
-    for x in snake_list:
-        pygame.draw.rect(screen, green, [x[0], x[1], snake_block, snake_block])
+def draw_snake(snake_list):
+    for segment in snake_list:
+        pygame.draw.rect(screen, green, [segment[0], segment[1], cell_size, cell_size])
 
-def message(msg, color):
-    mesg = font_style.render(msg, True, color)
-    screen.blit(mesg, [width / 6, height / 3])
+def draw_food(food_pos):
+    pygame.draw.rect(screen, white, [food_pos[0], food_pos[1], cell_size, cell_size])
+
+def show_score(score):
+    score_text = font.render("SCORE: " + str(score), True, green)
+    screen.blit(score_text, [10, 10])
+
+def message(text):
+    msg = font.render(text, True, white)
+    screen.blit(msg, [width / 10, height / 2])
 
 def game_loop():
     game_over = False
     game_close = False
 
-    x = width / 2
-    y = height / 2
-    x_change = 0
-    y_change = 0
+    # Snake start position and movement
+    x, y = width // 2, height // 2
+    dx, dy = 0, 0
 
-    snake_list = []
-    length_of_snake = 1
+    snake = []
+    snake_length = 1
 
-    foodx = round(random.randrange(0, width - snake_block) / 10.0) * 10.0
-    foody = round(random.randrange(0, height - snake_block) / 10.0) * 10.0
+    food = [random.randrange(1, (width - cell_size) // cell_size) * cell_size,
+            random.randrange(1, (height - cell_size) // cell_size) * cell_size]
 
     while not game_over:
         while game_close:
-            screen.fill(white)
-            message("Game Over! Press Q to Quit or R to Restart", red)
-            score_display(length_of_snake - 1)
+            screen.fill(black)
+            message("Game Over! Q-Quit | R-Restart")
+            show_score(snake_length - 1)
             pygame.display.update()
 
-            for event in pygame.event.get():
-                if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_q:
+            for e in pygame.event.get():
+                if e.type == pygame.KEYDOWN:
+                    if e.key == pygame.K_q:
                         game_over = True
                         game_close = False
-                    elif event.key == pygame.K_r:
+                    if e.key == pygame.K_r:
                         game_loop()
 
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
+        # Events
+        for e in pygame.event.get():
+            if e.type == pygame.QUIT:
                 game_over = True
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_LEFT:
-                    x_change = -snake_block
-                    y_change = 0
-                elif event.key == pygame.K_RIGHT:
-                    x_change = snake_block
-                    y_change = 0
-                elif event.key == pygame.K_UP:
-                    y_change = -snake_block
-                    x_change = 0
-                elif event.key == pygame.K_DOWN:
-                    y_change = snake_block
-                    x_change = 0
+            elif e.type == pygame.KEYDOWN:
+                if e.key == pygame.K_LEFT and dx == 0:
+                    dx, dy = -cell_size, 0
+                elif e.key == pygame.K_RIGHT and dx == 0:
+                    dx, dy = cell_size, 0
+                elif e.key == pygame.K_UP and dy == 0:
+                    dx, dy = 0, -cell_size
+                elif e.key == pygame.K_DOWN and dy == 0:
+                    dx, dy = 0, cell_size
 
-        if x >= width or x < 0 or y >= height or y < 0:
+        x += dx
+        y += dy
+
+        # Hit wall
+        if x < 0 or x >= width or y < 0 or y >= height:
             game_close = True
 
-        x += x_change
-        y += y_change
-        screen.fill(blue)
+        screen.fill(black)
+        draw_border()
 
-        pygame.draw.rect(screen, red, [foodx, foody, snake_block, snake_block])
-        snake_head = []
-        snake_head.append(x)
-        snake_head.append(y)
-        snake_list.append(snake_head)
+        draw_food(food)
 
-        if len(snake_list) > length_of_snake:
-            del snake_list[0]
+        head = [x, y]
+        snake.append(head)
 
-        for block in snake_list[:-1]:
-            if block == snake_head:
+        if len(snake) > snake_length:
+            del snake[0]
+
+        # Snake hit itself
+        for segment in snake[:-1]:
+            if segment == head:
                 game_close = True
 
-        draw_snake(snake_block, snake_list)
-        score_display(length_of_snake - 1)
+        draw_snake(snake)
+        show_score(snake_length - 1)
 
         pygame.display.update()
 
-        if x == foodx and y == foody:
-            foodx = round(random.randrange(0, width - snake_block) / 10.0) * 10.0
-            foody = round(random.randrange(0, height - snake_block) / 10.0) * 10.0
-            length_of_snake += 1
+        # Eat food
+        if x == food[0] and y == food[1]:
+            food = [random.randrange(1, (width - cell_size) // cell_size) * cell_size,
+                    random.randrange(1, (height - cell_size) // cell_size) * cell_size]
+            snake_length += 1
 
         clock.tick(snake_speed)
 
