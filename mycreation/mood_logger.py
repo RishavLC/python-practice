@@ -25,9 +25,10 @@ def show_mood_menu():
 def log_mood(choice):
     now = datetime.datetime.now()
     mood = moods.get(choice)
-    with open(mood_file, "a") as file:
+    with open(mood_file, "a", encoding="utf-8") as file:  # 💡 added encoding
         file.write(f"{now.strftime('%Y-%m-%d %H:%M:%S')} - {mood}\n")
     print(f"✅ Mood logged: {mood}")
+
 
 def show_history():
     print("\n📜 Mood History:")
