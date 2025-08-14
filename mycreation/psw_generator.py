@@ -1,26 +1,33 @@
 import random
 import string
 
-def generate_password(length, use_symbols=True, use_uppercase=True):
-    characters = string.ascii_lowercase + string.digits
-    if use_uppercase:
-        characters += string.ascii_uppercase
-    if use_symbols:
-        characters += string.punctuation
-
-    password = ''.join(random.choices(characters, k=length))
+def generate_password(length=12):
+    characters = string.ascii_letters + string.digits + string.punctuation
+    password = ''.join(random.choice(characters) for _ in range(length))
     return password
 
-def password_generator():
-    print("🔐 Advanced Password Generator")
-    try:
-        length = int(input("Enter desired password length: "))
-        use_symbols = input("Include symbols? (y/n): ").lower() == 'y'
-        use_uppercase = input("Include uppercase letters? (y/n): ").lower() == 'y'
+def password_strength(password):
+    strength = 0
+    if any(c.islower() for c in password):
+        strength += 1
+    if any(c.isupper() for c in password):
+        strength += 1
+    if any(c.isdigit() for c in password):
+        strength += 1
+    if any(c in string.punctuation for c in password):
+        strength += 1
 
-        password = generate_password(length, use_symbols, use_uppercase)
-        print("Your generated password is:", password)
-    except ValueError:
-        print("❌ Please enter a valid number.")
+    if strength == 4 and len(password) >= 12:
+        return "Very Strong 💪"
+    elif strength >= 3:
+        return "Strong 👍"
+    elif strength == 2:
+        return "Moderate 😐"
+    else:
+        return "Weak ❌"
 
-password_generator()
+if __name__ == "__main__":
+    length = int(input("Enter password length: "))
+    pwd = generate_password(length)
+    print(f"🔑 Your password: {pwd}")
+    print(f"📊 Strength: {password_strength(pwd)}")
