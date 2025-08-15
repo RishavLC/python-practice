@@ -1,4 +1,4 @@
-def add(x, y): return x + y
+def addition(x, y): return x + y
 def subtract(x, y): return x - y
 def multiply(x, y): return x * y
 def divide(x, y):
@@ -21,7 +21,7 @@ def calculator():
         num2 = float(input("Enter second number: "))
 
         if choice == '1':
-            print("Result:", add(num1, num2))
+            print("Result:", addition(num1, num2))
         elif choice == '2':
             print("Result:", subtract(num1, num2))
         elif choice == '3':
