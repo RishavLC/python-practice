@@ -1,4 +1,4 @@
-<!-- dashboard_seller.html -->
+<!-- dashboard_seller.html
 <!doctype html>
 <html lang="en">
 <head>
@@ -52,7 +52,7 @@
     </section>
   </div>
 </body>
-</html>
+</html> -->
 <!-- dashboard_admin.html
 <!doctype html>
 <html lang="en">
@@ -108,3 +108,59 @@
 </body>
 </html> -->
 
+<!-- dashboard_buyer.html -->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Buyer Dashboard</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <aside class="sidebar">
+    <h2>EasyBid</h2>
+    <nav>
+      <a href="#">Dashboard</a>
+      <a href="#">Browse Auctions</a>
+      <a href="#">My Bids</a>
+      <a href="#">Winning Auctions</a>
+      <a href="policies.html">Policies</a>
+    </nav>
+  </aside>
+
+  <div class="main">
+    <header class="header">
+      <h1>Buyer Dashboard</h1>
+      <div class="user-menu">
+        <span class="bell">🔔</span>
+        <span>Buyer</span>
+        <a href="logout.php">Logout</a>
+      </div>
+    </header>
+
+    <section class="content">
+      <h2>Browse Auctions</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>Laptop</h3>
+          <p>Current Bid: $200</p>
+          <p>Ends: 2025-08-25</p>
+          <button>Bid Now</button>
+        </div>
+        <div class="card">
+          <h3>Bike</h3>
+          <p>Current Bid: $400</p>
+          <p>Ends: 2025-08-30</p>
+          <button>Bid Now</button>
+        </div>
+      </div>
+
+      <h2>My Bids</h2>
+      <table>
+        <tr><th>Auction</th><th>My Bid</th><th>Status</th></tr>
+        <tr><td>Laptop</td><td>$210</td><td>Highest</td></tr>
+      </table>
+    </section>
+  </div>
+</body>
+</html>
