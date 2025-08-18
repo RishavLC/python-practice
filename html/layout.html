@@ -1,0 +1,54 @@
+<!-- dashboard_admin.html -->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <aside class="sidebar">
+    <h2>EasyBid</h2>
+    <nav>
+      <a href="#">Dashboard</a>
+      <a href="#">Manage Users</a>
+      <a href="#">Manage Auctions</a>
+      <a href="#">Payments</a>
+      <a href="#">Reports</a>
+      <a href="policies.html">Policies</a>
+    </nav>
+  </aside>
+
+  <div class="main">
+    <header class="header">
+      <h1>Admin Dashboard</h1>
+      <div class="user-menu">
+        <span class="bell">🔔</span>
+        <span>Admin</span>
+        <a href="logout.php">Logout</a>
+      </div>
+    </header>
+
+    <section class="content">
+      <h2>Overview</h2>
+      <div class="cards">
+        <div class="card">Total Users: 150</div>
+        <div class="card">Active Auctions: 45</div>
+        <div class="card">Revenue: $12,000</div>
+      </div>
+
+      <h2>Manage Users</h2>
+      <table>
+        <tr><th>Name</th><th>Email</th><th>Role</th><th>Action</th></tr>
+        <tr><td>John Doe</td><td>john@example.com</td><td>Seller</td><td><button>Ban</button></td></tr>
+      </table>
+
+      <h2>Manage Auctions</h2>
+      <table>
+        <tr><th>Title</th><th>Seller</th><th>Status</th><th>Action</th></tr>
+        <tr><td>Laptop</td><td>Alice</td><td>Running</td><td><button>Close</button></td></tr>
+      </table>
+    </section>
+  </div>
+</body>
+</html>
