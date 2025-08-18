@@ -1,4 +1,59 @@
-<!-- dashboard_admin.html -->
+<!-- dashboard_seller.html -->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Seller Dashboard</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <aside class="sidebar">
+    <h2>EasyBid</h2>
+    <nav>
+      <a href="#">Dashboard</a>
+      <a href="#">My Auctions</a>
+      <a href="#">Create Auction</a>
+      <a href="#">Payments</a>
+      <a href="policies.html">Policies</a>
+    </nav>
+  </aside>
+
+  <div class="main">
+    <header class="header">
+      <h1>Seller Dashboard</h1>
+      <div class="user-menu">
+        <span class="bell">🔔</span>
+        <span>Seller</span>
+        <a href="logout.php">Logout</a>
+      </div>
+    </header>
+
+    <section class="content">
+      <h2>Create Auction</h2>
+      <form>
+        <label>Title</label>
+        <input type="text" required>
+        <label>Description</label>
+        <textarea></textarea>
+        <label>Starting Price</label>
+        <input type="number" required>
+        <label>Start Time</label>
+        <input type="datetime-local" required>
+        <label>End Time</label>
+        <input type="datetime-local" required>
+        <button type="submit">Create</button>
+      </form>
+
+      <h2>My Auctions</h2>
+      <table>
+        <tr><th>Title</th><th>Status</th><th>Current Bid</th></tr>
+        <tr><td>Phone</td><td>Pending</td><td>$100</td></tr>
+      </table>
+    </section>
+  </div>
+</body>
+</html>
+<!-- dashboard_admin.html
 <!doctype html>
 <html lang="en">
 <head>
@@ -51,4 +106,5 @@
     </section>
   </div>
 </body>
-</html>
+</html> -->
+
