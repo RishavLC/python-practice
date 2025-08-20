@@ -5,18 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>EasyBid - Landing Page</title>
   <style>
-    /* Reset some default styles */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Arial', sans-serif;
-    }
-
-    body, html {
-      height: 100%;
-      background: #f0f4f8;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Arial', sans-serif; }
+    body, html { height: 100%; background: #1f2937; }
 
     .container {
       display: flex;
@@ -27,8 +17,8 @@
     /* Left side (Info) */
     .left {
       flex: 1;
-      background: linear-gradient(135deg, #2563eb, #3b82f6);
-      color: #fff;
+      background: linear-gradient(135deg, #111827, #1f2937);
+      color: #f9fafb;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -40,18 +30,20 @@
     .left h1 {
       font-size: 3rem;
       margin-bottom: 20px;
+      color: #facc15; /* bright yellow accent */
     }
 
     .left p {
       font-size: 1.2rem;
       line-height: 1.8;
       max-width: 500px;
+      color: #d1d5db;
     }
 
     /* Right side (Login) */
     .right {
       flex: 1;
-      background: #ffffff;
+      background: #111827;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -61,68 +53,64 @@
     .login-box {
       width: 100%;
       max-width: 400px;
-      background: #f9fafb;
+      background: #1f2937;
       padding: 40px;
       border-radius: 12px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+      color: #f9fafb;
+      transition: transform 0.3s;
+    }
+
+    .login-box:hover {
+      transform: translateY(-5px);
     }
 
     .login-box h2 {
       text-align: center;
       margin-bottom: 30px;
-      color: #111827;
+      color: #facc15;
     }
 
-    .login-box input {
+    .login-box input, .login-box select {
       width: 100%;
       padding: 12px 15px;
       margin-bottom: 20px;
       border-radius: 8px;
-      border: 1px solid #d1d5db;
+      border: none;
       font-size: 1rem;
+      background: #374151;
+      color: #f9fafb;
+    }
+
+    .login-box input::placeholder {
+      color: #9ca3af;
     }
 
     .login-box button {
       width: 100%;
       padding: 12px;
-      background: #2563eb;
-      color: #fff;
+      background: #facc15;
+      color: #111827;
       font-size: 1rem;
       border: none;
       border-radius: 8px;
       cursor: pointer;
       transition: 0.3s;
+      font-weight: bold;
     }
 
     .login-box button:hover {
-      background: #1d4ed8;
+      background: #eab308;
     }
 
     .login-box .role-select {
       margin-bottom: 20px;
-      width: 100%;
-      padding: 12px;
-      border-radius: 8px;
-      border: 1px solid #d1d5db;
-      font-size: 1rem;
-      background: #fff;
-      color: #111827;
     }
 
     @media(max-width: 900px) {
-      .container {
-        flex-direction: column;
-      }
-
-      .left, .right {
-        flex: none;
-        width: 100%;
-        height: 50vh;
-      }
-
-      .left h1 {
-        font-size: 2rem;
-      }
+      .container { flex-direction: column; }
+      .left, .right { flex: none; width: 100%; height: 50vh; }
+      .left h1 { font-size: 2rem; }
     }
   </style>
 </head>
@@ -132,9 +120,9 @@
     <!-- Left Info Section -->
     <div class="left">
       <h1>Welcome to EasyBid</h1>
-      <p>EasyBid is a modern auction platform where buyers and sellers come together.
-      Sellers can list products for auction, and buyers can place bids in real-time.
-      Admin manages all auctions ensuring fair play, secure transactions, and reliable notifications.</p>
+      <p>EasyBid is a modern auction platform where buyers and sellers come together. 
+      Sellers can list products for auction, and buyers can place bids in real-time. 
+      Admin ensures fair play, secure transactions, and reliable notifications.</p>
     </div>
 
     <!-- Right Login Section -->
@@ -164,7 +152,6 @@
         return;
       }
 
-      // Simple demo alert (replace with backend integration)
       alert(`Logging in as ${role} with email ${email}`);
     }
   </script>
